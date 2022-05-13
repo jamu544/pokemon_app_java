@@ -11,7 +11,7 @@ import retrofit2.Response;
 import android.app.ProgressDialog;
 import android.com.jamsand.io.pokemonapp.OnItemClickListener;
 import android.com.jamsand.io.pokemonapp.R;
-import android.com.jamsand.io.pokemonapp.view.activity.adapter.PokemonAdapter;
+import android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.com.jamsand.io.pokemonapp.network.ApiRequest;
 import android.com.jamsand.io.pokemonapp.network.RetrofitRequest;
@@ -76,9 +76,21 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 List<Pokemon.Results> pokemonList = pokemon.results;
                 pokemonArrayList.addAll(pokemonList);
                 adapter.notifyDataSetChanged();
+                adapter.setClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Intent detailsIntent = new Intent(context, PokemonDetails.class);
+                        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_NAME,pokemonArrayList.get(position).name);
+                        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_ID,position);
+
+                        startActivity(detailsIntent);
+                        Toast.makeText(context,""+ pokemonArrayList.get(position).name,Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });
+
     }
 
     private void loadData(){

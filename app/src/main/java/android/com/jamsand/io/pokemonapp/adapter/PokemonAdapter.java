@@ -1,4 +1,4 @@
-package android.com.jamsand.io.pokemonapp.view.activity.adapter;
+package android.com.jamsand.io.pokemonapp.adapter;
 
 import android.com.jamsand.io.pokemonapp.OnItemClickListener;
 import android.com.jamsand.io.pokemonapp.R;
