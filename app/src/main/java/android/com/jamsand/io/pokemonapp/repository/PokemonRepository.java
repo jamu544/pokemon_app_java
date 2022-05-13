@@ -21,7 +21,7 @@ public class PokemonRepository {
 
     public LiveData<Pokemon> getRepositoryOfPokemons(){
         final MutableLiveData<Pokemon> data = new MutableLiveData<>();
-        apiRequest.getAllPokemons()
+        apiRequest.getAllPokemonsFromApiRquest()
                 .enqueue(new Callback<Pokemon>() {
                     @Override
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {

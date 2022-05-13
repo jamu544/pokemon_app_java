@@ -42,11 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
-//        progressBar = new ProgressDialog(context);
-//        progressBar.setMessage("Loading...");
-//        progressBar.show();
 
-//        loadData();
         init();
         getPokemons();
     }
@@ -63,8 +59,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         adapter = new PokemonAdapter( pokemonArrayList,context);
         recyclerView.setAdapter(adapter);
 
-        // View Model
-      //  pokemonViewModel = ViewModelProvider.of(this).get(PokemonViewModel.class);
         pokemonViewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
 
     }
@@ -90,39 +84,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
             }
         });
-
-    }
-
-    private void loadData(){
-        //Create handle for the RetrofitInstance interface
-        ApiRequest service = RetrofitRequest.getRetrofitInstance().create(ApiRequest.class);
-        Call<Pokemon> call = service.getAllPokemons();
-        call.enqueue(new Callback<Pokemon>() {
-            @Override
-            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-                if (response.isSuccessful()) {
-                    progressBar.dismiss();
-                    progressBar.setCancelable(false);
-
-
-                    pokemonArrayList = response.body().results;
-                    displayListView(pokemonArrayList);
-                }
-            }
-            @Override
-            public void onFailure(Call<Pokemon> call, Throwable t) {
-                progressBar.dismiss();
-            }
-        });
-    }
-
-    private void displayListView(ArrayList<Pokemon.Results> pokemonList){
-        recyclerView = findViewById(R.id.recyclerView);
-        adapter = new PokemonAdapter(pokemonList,context);
-        adapter.setClickListener(this);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adapter);
 
     }
 

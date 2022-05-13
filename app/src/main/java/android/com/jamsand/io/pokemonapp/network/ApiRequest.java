@@ -8,5 +8,5 @@ import retrofit2.http.GET;
 public interface ApiRequest {
   //  @GET("https://pokeapi.co/api/v2/pokemon/")
     @GET("https://pokeapi.co/api/v2/pokemon/")
-    Call<Pokemon> getAllPokemons();
+    Call<Pokemon> getAllPokemonsFromApiRquest();
 }
