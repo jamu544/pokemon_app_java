@@ -33,9 +33,9 @@ public class PokemonDetails extends AppCompatActivity {
     }
 
     private void init(){
-        pokemonTextView = (TextView) findViewById(R.id.pokemonDetailsName);
-        weightTextView = (TextView)  findViewById(R.id.weightTextView);
-        heightTextView = (TextView) findViewById(R.id.heightTextView);
-        typesTextView = (TextView) findViewById(R.id.typeTextView);
+//        pokemonTextView = (TextView) findViewById(R.id.pokemonDetailsName);
+//        weightTextView = (TextView)  findViewById(R.id.weightTextView);
+//        heightTextView = (TextView) findViewById(R.id.heightTextView);
+//        typesTextView = (TextView) findViewById(R.id.typeTextView);
     }
 }

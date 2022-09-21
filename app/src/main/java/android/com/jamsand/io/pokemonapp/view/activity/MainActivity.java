@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.com.jamsand.io.pokemonapp.OnItemClickListener;
 import android.com.jamsand.io.pokemonapp.R;
 import android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
@@ -59,38 +58,43 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void getPokemons(){
-        pokemonViewModel.getPokemonLiveData().observe(this,pokemon -> {
-            if (pokemon != null && pokemon.results != null && !pokemon.results.isEmpty()){
-                progressBar.dismiss();
-                List<Pokemon.PokemonArray> pokemonList = pokemon.results;
-                pokemonArrayList.addAll(pokemonList);
-                adapter.notifyDataSetChanged();
-                adapter.setClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-                        Intent detailsIntent = new Intent(context, PokemonDetails.class);
-                        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_NAME,pokemonArrayList.get(position).name);
-                        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_ID,position);
-
-                        startActivity(detailsIntent);
-                        Toast.makeText(context,""+ pokemonArrayList.get(position).name,Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });
+//        pokemonViewModel.getPokemonLiveData().observe(this,pokemon -> {
+//            if (pokemon != null && pokemon.results != null && !pokemon.results.isEmpty()){
+//                progressBar.dismiss();
+//                List<Pokemon.PokemonArray> pokemonList = pokemon.results;
+//                pokemonArrayList.addAll(pokemonList);
+//                adapter.notifyDataSetChanged();
+//                adapter.setClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onClick(View view, int position) {
+//                        Intent detailsIntent = new Intent(context, PokemonDetails.class);
+//                        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_NAME,pokemonArrayList.get(position).name);
+//                        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_ID,position);
+//
+//                        startActivity(detailsIntent);
+//                        Toast.makeText(context,""+ pokemonArrayList.get(position).name,Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//            }
+//        });
 
     }
 
     @Override
-    public void onClick(View view, int position) {
-        Intent detailsIntent = new Intent(this, PokemonDetails.class);
-        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_NAME,pokemonArrayList.get(position).name);
-        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_ID,position);
-
-        startActivity(detailsIntent);
-        Toast.makeText(context,""+ pokemonArrayList.get(position).name,Toast.LENGTH_SHORT).show();
+    public void onClick(Pokemon.PokemonArray pokemon, int position) {
 
     }
+
+//    @Override
+//    public void onClick(View view, int position) {
+//        Intent detailsIntent = new Intent(this, PokemonDetails.class);
+//        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_NAME,pokemonArrayList.get(position).name);
+//        detailsIntent.putExtra(AppConstants.EXTRA_POKEMON_ID,position);
+//
+//        startActivity(detailsIntent);
+//        Toast.makeText(context,""+ pokemonArrayList.get(position).name,Toast.LENGTH_SHORT).show();
+//
+//    }
 
 }

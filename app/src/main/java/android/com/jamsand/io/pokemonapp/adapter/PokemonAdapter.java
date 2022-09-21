@@ -1,6 +1,7 @@
 package android.com.jamsand.io.pokemonapp.adapter;
 
-import android.com.jamsand.io.pokemonapp.OnItemClickListener;
+import android.com.jamsand.io.pokemonapp.databinding.ActivityPokemonDetailsBinding;
+import android.com.jamsand.io.pokemonapp.view.activity.OnItemClickListener;
 import android.com.jamsand.io.pokemonapp.R;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.content.Context;
@@ -15,9 +16,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder>{
+public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> implements OnItemClickListener{
 
     public Context context;
     public ArrayList<Pokemon.PokemonArray> pokemonList;
@@ -30,25 +32,24 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
         this.context = context;
         this.pokemonList = pokemonList;
     }
-
-
     @NonNull
     @Override
     public PokemonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.pokemon_list_item,parent,false);
-        PokemonHolder holder = new PokemonHolder(view);
-        return holder;
+        ActivityPokemonDetailsBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.activity_pokemon_details,parent, false
+        );
+        return new PokemonHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PokemonHolder holder, int position) {
-        final String pokemon = pokemonList.get(position).name;
-        final String imageUrl = pokemonList.get(position).imageUrl;
-        holder.pokemonName.setText(pokemon);
-        Glide.with(context)
-                .load(imageUrl)
-                .into(holder.thumbnail);
+    //    final String pokemon = pokemonList.get(position).name;
+    //    final String imageUrl = pokemonList.get(position).imageUrl;
+    //    holder.pokemonName.setText(pokemon);
+//        Glide.with(context)
+//                .load(imageUrl)
+//                .into(holder.thumbnail);
 
     }
     public void setClickListener(OnItemClickListener clickListener) {
@@ -59,25 +60,21 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     public int getItemCount() {
         return pokemonList == null? 0:pokemonList.size();
     }
-    public class PokemonHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView pokemonName;
-        public ImageView thumbnail;
+
+    @Override
+    public void onClick(Pokemon.PokemonArray pokemon, int position) {
+
+    }
 
 
+    public class PokemonHolder extends RecyclerView.ViewHolder {
 
-        public PokemonHolder(@NonNull View itemView) {
-            super(itemView);
-            this.pokemonName = (TextView) itemView.findViewById(R.id.pokemonName);
-            this.thumbnail = (ImageView) itemView.findViewById(R.id.imageViewThumbnail);
-            itemView.setOnClickListener(this);
+        public ActivityPokemonDetailsBinding pokemonDetailsBinding;
+
+        public PokemonHolder(ActivityPokemonDetailsBinding pokemonDetailsBinding) {
+            super(pokemonDetailsBinding.getRoot());
+            this.pokemonDetailsBinding = pokemonDetailsBinding;
         }
 
-        @Override
-        public void onClick(View view) {
-
-            if (clickListener != null)
-                clickListener.onClick(view, getAdapterPosition());
-
-        }
     }
 }
