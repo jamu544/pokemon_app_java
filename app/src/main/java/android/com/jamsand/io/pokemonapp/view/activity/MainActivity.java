@@ -4,17 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import android.app.ProgressDialog;
 import android.com.jamsand.io.pokemonapp.OnItemClickListener;
 import android.com.jamsand.io.pokemonapp.R;
 import android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
-import android.com.jamsand.io.pokemonapp.network.ApiRequest;
-import android.com.jamsand.io.pokemonapp.network.RetrofitRequest;
 import android.com.jamsand.io.pokemonapp.utils.AppConstants;
 import android.com.jamsand.io.pokemonapp.viewmodel.PokemonViewModel;
 import android.content.Context;
@@ -34,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private PokemonAdapter adapter;
     private ProgressDialog progressBar;
 
-    private ArrayList<Pokemon.Results> pokemonArrayList = new ArrayList<>();
+    private ArrayList<Pokemon.PokemonArray> pokemonArrayList = new ArrayList<>();
     PokemonViewModel pokemonViewModel;
 
     @Override
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         pokemonViewModel.getPokemonLiveData().observe(this,pokemon -> {
             if (pokemon != null && pokemon.results != null && !pokemon.results.isEmpty()){
                 progressBar.dismiss();
-                List<Pokemon.Results> pokemonList = pokemon.results;
+                List<Pokemon.PokemonArray> pokemonList = pokemon.results;
                 pokemonArrayList.addAll(pokemonList);
                 adapter.notifyDataSetChanged();
                 adapter.setClickListener(new OnItemClickListener() {

@@ -5,14 +5,19 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class Pokemon {
-    @Expose
-    @SerializedName("results")
-    public ArrayList<Results> results = new ArrayList<Results>();
+    @SerializedName("count")
+    public String count;
+    @SerializedName("next")
+    public String next;
 
-    public class Results {
-        @SerializedName("name")
-        public String name;
+
+    @SerializedName("results")
+    public ArrayList<PokemonArray> results;
+
+    public class PokemonArray {
+        @SerializedName("pokemonID")
+        public int pokemonID;
         @SerializedName("url")
-        public String imageUrl;
+        public String url;
     }
 }

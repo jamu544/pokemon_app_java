@@ -20,13 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder>{
 
     public Context context;
-    public ArrayList<Pokemon.Results> pokemonList;
+    public ArrayList<Pokemon.PokemonArray> pokemonList;
 
 
 
     public OnItemClickListener clickListener;
 
-    public PokemonAdapter(ArrayList<Pokemon.Results> pokemonList, Context context){
+    public PokemonAdapter(ArrayList<Pokemon.PokemonArray> pokemonList, Context context){
         this.context = context;
         this.pokemonList = pokemonList;
     }
