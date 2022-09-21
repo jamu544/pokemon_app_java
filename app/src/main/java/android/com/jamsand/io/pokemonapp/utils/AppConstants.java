@@ -6,6 +6,6 @@ public class AppConstants {
     public static final String EXTRA_POKEMON_NAME = "pokemon";
     public static final String EXTRA_POKEMON_ID = "id";
     public static final String BASE_URL2= "https://pokeapi.co/api/v2/pokemon/{id}/";
-            
+
 
 }
