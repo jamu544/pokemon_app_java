@@ -44,12 +44,15 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
 
     @Override
     public void onBindViewHolder(@NonNull PokemonHolder holder, int position) {
-    //    final String pokemon = pokemonList.get(position).name;
-    //    final String imageUrl = pokemonList.get(position).imageUrl;
+        Pokemon.PokemonArray pokemon = pokemonList.get(position);
+        holder.pokemonDetailsBinding.pokemonName.setText(pokemon.name);
+
+//        final String pokemon = pokemonList.get(position).name;
+//        final String imageUrl = pokemonList.get(position).imageUrl;
     //    holder.pokemonName.setText(pokemon);
 //        Glide.with(context)
 //                .load(imageUrl)
-//                .into(holder.thumbnail);
+//                .into(holder.pokemonDetailsBinding.imageViewThumbnail);
 
     }
     public void setClickListener(OnItemClickListener clickListener) {

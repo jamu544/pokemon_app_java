@@ -19,5 +19,7 @@ public class Pokemon {
         public int pokemonID;
         @SerializedName("url")
         public String url;
+        @SerializedName("name")
+        public String name;
     }
 }
