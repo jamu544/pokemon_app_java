@@ -46,13 +46,13 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     public void onBindViewHolder(@NonNull PokemonHolder holder, int position) {
         Pokemon.PokemonArray pokemon = pokemonList.get(position);
         holder.pokemonDetailsBinding.pokemonName.setText(pokemon.name);
+        pokemon.pokemonID = position+1;
 
-//        final String pokemon = pokemonList.get(position).name;
-//        final String imageUrl = pokemonList.get(position).imageUrl;
-    //    holder.pokemonName.setText(pokemon);
-//        Glide.with(context)
-//                .load(imageUrl)
-//                .into(holder.pokemonDetailsBinding.imageViewThumbnail);
+       // final String imageUrl = pokemonList.get(position).imageUrl;
+
+        Glide.with(context)
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.pokemonID+".png")
+                .into(holder.pokemonDetailsBinding.imageViewThumbnail);
 
     }
     public void setClickListener(OnItemClickListener clickListener) {

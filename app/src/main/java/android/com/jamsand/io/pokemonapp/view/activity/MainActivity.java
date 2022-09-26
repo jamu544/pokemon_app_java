@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         progressBar.setMessage("Loading...");
         progressBar.show();
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setHasFixedSize(true);
 
@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void getPokemons(){
-//        pokemonViewModel.getPokemonLiveData().observe(this,pokemon -> {
-//            if (pokemon != null && pokemon.results != null && !pokemon.results.isEmpty()){
-//                progressBar.dismiss();
-//                List<Pokemon.PokemonArray> pokemonList = pokemon.results;
-//                pokemonArrayList.addAll(pokemonList);
-//                adapter.notifyDataSetChanged();
+        pokemonViewModel.getPokemonLiveData().observe(this,pokemon -> {
+            if (pokemon != null && pokemon.results != null && !pokemon.results.isEmpty()){
+                progressBar.dismiss();
+                List<Pokemon.PokemonArray> pokemonList = pokemon.results;
+                pokemonArrayList.addAll(pokemonList);
+                adapter.notifyDataSetChanged();
 //                adapter.setClickListener(new OnItemClickListener() {
 //                    @Override
 //                    public void onClick(View view, int position) {
@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 //                        Toast.makeText(context,""+ pokemonArrayList.get(position).name,Toast.LENGTH_SHORT).show();
 //                    }
 //                });
-//
-//            }
-//        });
+
+            }
+        });
 
     }
 
