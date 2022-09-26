@@ -28,6 +28,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
+            android:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -41,4 +43,9 @@
             tools:itemCount="5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="adapter"
+            type="android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter" />
+    </data>
 </layout>

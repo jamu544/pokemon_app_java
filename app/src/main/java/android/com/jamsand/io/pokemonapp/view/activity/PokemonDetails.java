@@ -3,7 +3,7 @@ package android.com.jamsand.io.pokemonapp.view.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.com.jamsand.io.pokemonapp.R;
-import android.com.jamsand.io.pokemonapp.utils.AppConstants;
+import android.com.jamsand.io.pokemonapp.utilities.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +27,8 @@ public class PokemonDetails extends AppCompatActivity {
         context = this;
 
         Intent intent = getIntent();
-         pokemonName = intent.getStringExtra(AppConstants.EXTRA_POKEMON_NAME);
-         pokemonID = intent.getStringExtra(AppConstants.EXTRA_POKEMON_ID);
+         pokemonName = intent.getStringExtra(Utils.EXTRA_POKEMON_NAME);
+         pokemonID = intent.getStringExtra(Utils.EXTRA_POKEMON_ID);
         init();
     }
 

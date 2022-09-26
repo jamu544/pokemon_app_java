@@ -15,15 +15,17 @@ import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> implements OnItemClickListener{
 
     public Context context;
-    public ArrayList<Pokemon.PokemonArray> pokemonList;
+    public List<Pokemon.PokemonArray> pokemonList;
 
 
 
@@ -32,6 +34,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     public PokemonAdapter(ArrayList<Pokemon.PokemonArray> pokemonList, Context context){
         this.context = context;
         this.pokemonList = pokemonList;
+    }
+
+    public PokemonAdapter(Context context){
+        this.context = context;
     }
     @NonNull
     @Override
@@ -57,6 +63,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
     }
+    public void setPokemonList(List<Pokemon.PokemonArray> pokemonList){
+        this.pokemonList = pokemonList;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
@@ -77,6 +87,11 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
             super(pokemonDetailsBinding.getRoot());
             this.pokemonDetailsBinding = pokemonDetailsBinding;
         }
+
+        public void bind(Object object){
+            pokemonDetailsBinding.setVariable(BR.pokemon, object);
+            pokemonDetailsBinding.executePendingBindings();
+            }
 
     }
 }

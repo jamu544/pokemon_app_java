@@ -1,6 +1,7 @@
 package android.com.jamsand.io.pokemonapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,14 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.com.jamsand.io.pokemonapp.R;
 import android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter;
+import android.com.jamsand.io.pokemonapp.databinding.ActivityMainBinding;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
-import android.com.jamsand.io.pokemonapp.utils.AppConstants;
 import android.com.jamsand.io.pokemonapp.viewmodel.PokemonViewModel;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +29,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private ArrayList<Pokemon.PokemonArray> pokemonArrayList = new ArrayList<>();
     PokemonViewModel pokemonViewModel;
 
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         context = this;
 
         init();
@@ -42,16 +42,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void init(){
+
         progressBar = new ProgressDialog(context);
         progressBar.setMessage("Loading...");
         progressBar.show();
 
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setHasFixedSize(true);
 
-        adapter = new PokemonAdapter( pokemonArrayList,context);
-        recyclerView.setAdapter(adapter);
+
+
+
+
+
 
         pokemonViewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
 
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 progressBar.dismiss();
                 List<Pokemon.PokemonArray> pokemonList = pokemon.results;
                 pokemonArrayList.addAll(pokemonList);
+                adapter = new PokemonAdapter( pokemonArrayList,context);
+                binding.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 //                adapter.setClickListener(new OnItemClickListener() {
 //                    @Override

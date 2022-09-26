@@ -5,6 +5,9 @@
         <variable
             name="pokemon"
             type="android.com.jamsand.io.pokemonapp.model.Pokemon.PokemonArray" />
+        <variable
+            name="onItemClick"
+            type="android.com.jamsand.io.pokemonapp.view.activity.OnItemClickListener" />
     </data>
     <com.google.android.material.card.MaterialCardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
