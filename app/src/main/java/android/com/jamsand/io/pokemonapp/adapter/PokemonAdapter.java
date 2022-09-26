@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,12 +49,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
         holder.pokemonDetailsBinding.pokemonName.setText(pokemon.name);
         pokemon.pokemonID = position+1;
 
-       // final String imageUrl = pokemonList.get(position).imageUrl;
-
-        Glide.with(context)
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.pokemonID+".png")
+        Picasso.with(context).
+                load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+                        +pokemon.pokemonID+".png")
                 .into(holder.pokemonDetailsBinding.imageViewThumbnail);
-
     }
     public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
