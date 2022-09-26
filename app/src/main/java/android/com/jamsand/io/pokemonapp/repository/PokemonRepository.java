@@ -1,5 +1,6 @@
 package android.com.jamsand.io.pokemonapp.repository;
 
+import android.com.jamsand.io.pokemonapp.model.Details;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.com.jamsand.io.pokemonapp.network.ApiRequest;
 import android.com.jamsand.io.pokemonapp.network.RetrofitRequest;
@@ -19,18 +20,18 @@ public class PokemonRepository {
         apiRequest = RetrofitRequest.getRetrofitInstance().create(ApiRequest.class);
     }
 
-    public LiveData<Pokemon> getRepositoryOfPokemons(){
+    public LiveData<Pokemon> getRepositoryOfPokemons() {
         final MutableLiveData<Pokemon> data = new MutableLiveData<>();
         apiRequest.getAllPokemonsFromApiRquest()
                 .enqueue(new Callback<Pokemon>() {
                     @Override
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-                        Log.d(TAG, "onResponse response:: "+ response);
-                        if (response.body() != null){
+                        Log.d(TAG, "onResponse response:: " + response);
+                        if (response.body() != null) {
                             data.setValue(response.body());
 
-                            Log.d(TAG, "pokemon total:: "+ response.body());
-                            Log.d(TAG, "size:: :"+ response.body().results.size());
+                            Log.d(TAG, "pokemon total:: " + response.body());
+                            Log.d(TAG, "size:: :" + response.body().results.size());
                         }
                     }
 
@@ -41,4 +42,29 @@ public class PokemonRepository {
                 });
         return data;
     }
+
+    public MutableLiveData<Details> getRepositoryOfPokemonDetails() {
+        final MutableLiveData<Details> data = new MutableLiveData<>();
+        apiRequest.getPokemonDetails("name")
+                .enqueue(new Callback<Details>() {
+                    @Override
+                    public void onResponse(Call<Details> call, Response<Details> response) {
+                        Log.d(TAG, "onResponse response:: " + response);
+                        if (response.body() != null) {
+                            data.setValue(response.body());
+
+                            Log.d(TAG, "pokemon datails:: " + response.body());
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Details> call, Throwable t) {
+
+                    }
+                });
+
+        return data;
+    }
+
 }
