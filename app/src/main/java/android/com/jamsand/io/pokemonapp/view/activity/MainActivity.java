@@ -1,15 +1,12 @@
 package android.com.jamsand.io.pokemonapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.com.jamsand.io.pokemonapp.R;
 import android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter;
-import android.com.jamsand.io.pokemonapp.databinding.ActivityMainBinding;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.com.jamsand.io.pokemonapp.viewmodel.PokemonViewModel;
 import android.content.Context;
@@ -29,12 +26,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private ArrayList<Pokemon.PokemonArray> pokemonArrayList = new ArrayList<>();
     PokemonViewModel pokemonViewModel;
 
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView( R.layout.activity_main);
         context = this;
 
         init();
@@ -47,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         progressBar.setMessage("Loading...");
         progressBar.show();
 
-
-
-
+        adapter = new PokemonAdapter( pokemonArrayList,context);
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setAdapter(adapter);
 
 
 
@@ -64,9 +60,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 progressBar.dismiss();
                 List<Pokemon.PokemonArray> pokemonList = pokemon.results;
                 pokemonArrayList.addAll(pokemonList);
-                adapter = new PokemonAdapter( pokemonArrayList,context);
-                binding.setAdapter(adapter);
+
+            //    binding.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
 //                adapter.setClickListener(new OnItemClickListener() {
 //                    @Override
 //                    public void onClick(View view, int position) {

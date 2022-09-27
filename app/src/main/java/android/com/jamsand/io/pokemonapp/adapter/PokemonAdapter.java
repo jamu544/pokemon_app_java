@@ -1,17 +1,15 @@
 package android.com.jamsand.io.pokemonapp.adapter;
 
-import android.com.jamsand.io.pokemonapp.databinding.ActivityPokemonDetailsBinding;
+
+import android.com.jamsand.io.pokemonapp.BR;
+import android.com.jamsand.io.pokemonapp.databinding.PokemonListItemBinding;
 import android.com.jamsand.io.pokemonapp.view.activity.OnItemClickListener;
 import android.com.jamsand.io.pokemonapp.R;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.library.baseAdapters.BR;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> implements OnItemClickListener{
@@ -42,9 +40,9 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     @NonNull
     @Override
     public PokemonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ActivityPokemonDetailsBinding binding = DataBindingUtil.inflate(
+        PokemonListItemBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.activity_pokemon_details,parent, false
+                R.layout.pokemon_list_item,parent, false
         );
         return new PokemonHolder(binding);
     }
@@ -52,13 +50,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     @Override
     public void onBindViewHolder(@NonNull PokemonHolder holder, int position) {
         Pokemon.PokemonArray pokemon = pokemonList.get(position);
-        holder.pokemonDetailsBinding.pokemonName.setText(pokemon.name);
+        holder.itemBinding.pokemonName.setText(pokemon.name);
         pokemon.pokemonID = position+1;
 
         Picasso.with(context).
                 load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
                         +pokemon.pokemonID+".png")
-                .into(holder.pokemonDetailsBinding.imageViewThumbnail);
+                .into(holder.itemBinding.imageViewThumbnail);
+        holder.itemBinding.setOnItemClick((OnItemClickListener) context);
     }
     public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
@@ -81,16 +80,17 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
 
     public class PokemonHolder extends RecyclerView.ViewHolder {
 
-        public ActivityPokemonDetailsBinding pokemonDetailsBinding;
+        //public PokemonListItemBinding itemBinding;
+        public PokemonListItemBinding itemBinding;
 
-        public PokemonHolder(ActivityPokemonDetailsBinding pokemonDetailsBinding) {
-            super(pokemonDetailsBinding.getRoot());
-            this.pokemonDetailsBinding = pokemonDetailsBinding;
+        public PokemonHolder(PokemonListItemBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
         }
 
         public void bind(Object object){
-            pokemonDetailsBinding.setVariable(BR.pokemon, object);
-            pokemonDetailsBinding.executePendingBindings();
+            itemBinding.setVariable(BR.pokemon, object);
+            itemBinding.executePendingBindings();
             }
 
     }
