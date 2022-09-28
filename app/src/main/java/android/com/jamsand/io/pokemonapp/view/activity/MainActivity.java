@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void getPokemons() {
-        pokemonViewModel.getPokemonLiveData().observe(this, pokemon -> {
+        pokemonViewModel.getPokemonListLiveData().observe(this, pokemon -> {
             if (pokemon != null && pokemon.results != null && !pokemon.results.isEmpty()) {
                 progressBar.dismiss();
                 List<Pokemon.PokemonArray> pokemonList = pokemon.results;

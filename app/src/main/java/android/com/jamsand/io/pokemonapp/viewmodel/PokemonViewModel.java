@@ -1,6 +1,7 @@
 package android.com.jamsand.io.pokemonapp.viewmodel;
 
 import android.app.Application;
+import android.com.jamsand.io.pokemonapp.model.Details;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.com.jamsand.io.pokemonapp.repository.PokemonRepository;
 
@@ -10,15 +11,22 @@ import androidx.lifecycle.LiveData;
 
 public class PokemonViewModel  extends AndroidViewModel {
     private PokemonRepository pokemonResponse;
-    private LiveData<Pokemon> pokemonLiveData;
+    private LiveData<Pokemon> pokemonListLiveData;
+    private LiveData<Details> pokemonDetailsLiveData;
 
+
+   // private
     public PokemonViewModel(@NonNull Application application) {
         super(application);
         pokemonResponse = new PokemonRepository();
-        this.pokemonLiveData = pokemonResponse.getRepositoryOfPokemons();
+        this.pokemonListLiveData = pokemonResponse.getRepositoryOfPokemons();
+        this.pokemonDetailsLiveData = pokemonResponse.getRepositoryOfPokemonDetails();
     }
 
-    public  LiveData<Pokemon> getPokemonLiveData(){
-        return pokemonLiveData;
+    public  LiveData<Pokemon> getPokemonListLiveData(){
+        return pokemonListLiveData;
+    }
+    public  LiveData<Details> getPokemonDetailsLiveData(){
+        return pokemonDetailsLiveData;
     }
 }

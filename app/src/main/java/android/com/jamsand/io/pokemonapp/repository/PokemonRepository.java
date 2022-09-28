@@ -43,7 +43,7 @@ public class PokemonRepository {
         return data;
     }
 
-    public MutableLiveData<Details> getRepositoryOfPokemonDetails() {
+    public LiveData<Details> getRepositoryOfPokemonDetails() {
         final MutableLiveData<Details> data = new MutableLiveData<>();
         getDataService.getPokemonDetails("name")
                 .enqueue(new Callback<Details>() {
