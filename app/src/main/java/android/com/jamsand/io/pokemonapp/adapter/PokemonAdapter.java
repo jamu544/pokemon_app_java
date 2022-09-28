@@ -9,6 +9,7 @@ import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -57,6 +58,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
                 load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
                         +pokemon.pokemonID+".png")
                 .into(holder.itemBinding.imageViewThumbnail);
+
+        holder.bind(pokemon);
         holder.itemBinding.setOnItemClick((OnItemClickListener) context);
     }
     public void setClickListener(OnItemClickListener clickListener) {
@@ -73,7 +76,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     }
 
     @Override
-    public void onClick(Pokemon.PokemonArray pokemon, int position) {
+    public void onClick(Pokemon.PokemonArray pokemon) {
+        Toast.makeText(context, "Testing on cclick" + pokemon.name+" position", Toast.LENGTH_SHORT).show();
 
     }
 
