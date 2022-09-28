@@ -68,19 +68,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 //    binding.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
-                adapter.setClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onClick(Pokemon.PokemonArray pokemon) {
-
-                        Intent detailsIntent = new Intent(context, PokemonDetails.class);
-                        detailsIntent.putExtra(Utils.EXTRA_POKEMON_NAME, pokemonArrayList.get(pokemon.pokemonID).name);
-                        detailsIntent.putExtra(Utils.EXTRA_POKEMON_ID, pokemon.pokemonID);
-
-                        startActivity(detailsIntent);
-                        Toast.makeText(context, "" + pokemonArrayList.get(pokemon.pokemonID).name, Toast.LENGTH_SHORT).show();
-
-                    }
-                });
             }
         });
     }
@@ -92,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         detailsIntent.putExtra(Utils.EXTRA_POKEMON_ID,pokemon.pokemonID);
 
         startActivity(detailsIntent);
-        Toast.makeText(context,pokemonArrayList.get(pokemon.pokemonID).pokemonID+" "+ pokemonArrayList.get(pokemon.pokemonID).name,Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, pokemonArrayList.get(pokemon.pokemonID).name,Toast.LENGTH_SHORT).show();
     }
 
 }
