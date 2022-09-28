@@ -35,7 +35,7 @@ public class PokemonDetails extends AppCompatActivity {
         Intent intent = getIntent();
          pokemonName = intent.getStringExtra(Utils.EXTRA_POKEMON_NAME);
          pokemonID = String.valueOf(intent.getStringExtra(Utils.EXTRA_POKEMON_ID));
-        init();
+          init();
         binding.pokemonDetailsName.setText(pokemonName);
     }
 
