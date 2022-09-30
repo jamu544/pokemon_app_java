@@ -102,22 +102,18 @@ public class PokemonDetails extends AppCompatActivity {
                     listOftypes.add(type.type.name);
                     stringBuilder.append(type.type.name+" ");
                 }
-
                 binding.typeTextView.setText("Type : "+stringBuilder);
-
                 Glide.with(context)
                         .load(response.body().sprites.other.home.front_default)
                         .into(binding.imageView);
-
                 progressBar.dismiss();
             }
 
             @Override
             public void onFailure(Call<Details> call, Throwable t) {
-
             }
         });
     }
-    
+
 
 }
