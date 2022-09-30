@@ -5,7 +5,7 @@ import android.com.jamsand.io.pokemonapp.utilities.Utils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitRequest {
+public class APIClient {
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofitInstance(){

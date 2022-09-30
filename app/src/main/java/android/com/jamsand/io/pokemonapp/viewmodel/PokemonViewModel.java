@@ -13,14 +13,15 @@ public class PokemonViewModel  extends AndroidViewModel {
     private PokemonRepository pokemonResponse;
     private LiveData<Pokemon> pokemonListLiveData;
     private LiveData<Details> pokemonDetailsLiveData;
+    private String pokemonName;
 
 
    // private
     public PokemonViewModel(@NonNull Application application) {
         super(application);
         pokemonResponse = new PokemonRepository();
-        this.pokemonListLiveData = pokemonResponse.getRepositoryOfPokemons();
-        this.pokemonDetailsLiveData = pokemonResponse.getRepositoryOfPokemonDetails();
+        this.pokemonListLiveData = pokemonResponse.getRepositoryListOfPokemons();
+        this.pokemonDetailsLiveData = pokemonResponse.getRepositoryOfPokemonDetails(pokemonName);
     }
 
     public  LiveData<Pokemon> getPokemonListLiveData(){

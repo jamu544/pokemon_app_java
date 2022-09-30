@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokemonApp">
         <activity
+            android:theme="@style/Theme.PokemonApp.NoActionBar"
             android:name=".view.activity.PokemonDetails"
             android:exported="false" />
         <activity

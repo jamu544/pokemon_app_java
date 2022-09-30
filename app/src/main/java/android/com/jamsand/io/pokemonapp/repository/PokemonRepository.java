@@ -2,8 +2,8 @@ package android.com.jamsand.io.pokemonapp.repository;
 
 import android.com.jamsand.io.pokemonapp.model.Details;
 import android.com.jamsand.io.pokemonapp.model.Pokemon;
-import android.com.jamsand.io.pokemonapp.network.GetDataService;
-import android.com.jamsand.io.pokemonapp.network.RetrofitRequest;
+import android.com.jamsand.io.pokemonapp.network.APIInterface;
+import android.com.jamsand.io.pokemonapp.network.APIClient;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -14,15 +14,15 @@ import retrofit2.Response;
 
 public class PokemonRepository {
     private static final String TAG = PokemonRepository.class.getSimpleName();
-    private final GetDataService getDataService;
+    private final APIInterface APIInterface;
 
     public PokemonRepository() {
-        getDataService = RetrofitRequest.getRetrofitInstance().create(GetDataService.class);
+        APIInterface = APIClient.getRetrofitInstance().create(APIInterface.class);
     }
 
-    public LiveData<Pokemon> getRepositoryOfPokemons() {
+    public LiveData<Pokemon> getRepositoryListOfPokemons() {
         final MutableLiveData<Pokemon> data = new MutableLiveData<>();
-        getDataService.getAllPokemonsFromApiRquest()
+        APIInterface.getAllPokemonsFromApiRquest()
                 .enqueue(new Callback<Pokemon>() {
                     @Override
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
@@ -43,9 +43,9 @@ public class PokemonRepository {
         return data;
     }
 
-    public LiveData<Details> getRepositoryOfPokemonDetails() {
+    public LiveData<Details> getRepositoryOfPokemonDetails(String name) {
         final MutableLiveData<Details> data = new MutableLiveData<>();
-        getDataService.getPokemonDetails("name")
+        APIInterface.getPokemonDetailsFromApiRequest(name)
                 .enqueue(new Callback<Details>() {
                     @Override
                     public void onResponse(Call<Details> call, Response<Details> response) {

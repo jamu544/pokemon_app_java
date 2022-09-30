@@ -35,7 +35,7 @@ public class Details {
     }
 
     public class Home {
-        public String font_default;
+        public String front_default;
     }
 
 
