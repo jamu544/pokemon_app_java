@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PokemonApp Java</string>
+    <string name="app_name">Pokemon App</string>
     <string name="pokemons">Pokemons</string>
     <string name="height">Height : 70cm</string>
     <string name="weight">Weight</string>

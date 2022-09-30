@@ -1,5 +1,7 @@
 package android.com.jamsand.io.pokemonapp.view.activity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
 
@@ -50,13 +53,23 @@ public class PokemonDetails extends AppCompatActivity {
         context = this;
         Intent intent = getIntent();
         pokemonName = intent.getStringExtra(Utils.EXTRA_POKEMON_NAME);
-        //   pokemonID = String.valueOf(intent.getStringExtra(Utils.EXTRA_POKEMON_ID));
-
-
-          init();
+        init();
         binding.pokemonDetailsName.setText(pokemonName);
-
         getPokemonDetailsFromAPIRequest(pokemonName);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home :
+                onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init(){
@@ -104,10 +117,7 @@ public class PokemonDetails extends AppCompatActivity {
 
             }
         });
-
-
-
-
     }
+    
 
 }
