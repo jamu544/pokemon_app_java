@@ -25,19 +25,11 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
 
     public Context context;
     public List<Pokemon.PokemonArray> pokemonList;
-
-
-
-    public OnItemClickListener clickListener;
-
     public PokemonAdapter(ArrayList<Pokemon.PokemonArray> pokemonList, Context context){
         this.context = context;
         this.pokemonList = pokemonList;
     }
 
-    public PokemonAdapter(Context context){
-        this.context = context;
-    }
     @NonNull
     @Override
     public PokemonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,13 +54,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
         holder.bind(pokemon);
         holder.itemBinding.setOnItemClick((OnItemClickListener) context);
     }
-    public void setClickListener(OnItemClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
-    public void setPokemonList(List<Pokemon.PokemonArray> pokemonList){
-        this.pokemonList = pokemonList;
-        notifyDataSetChanged();
-    }
 
     @Override
     public int getItemCount() {
@@ -78,13 +63,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     @Override
     public void onClick(Pokemon.PokemonArray pokemon) {
         Toast.makeText(context, "Testing on cclick" + pokemon.name+" position", Toast.LENGTH_SHORT).show();
-
     }
 
 
     public class PokemonHolder extends RecyclerView.ViewHolder {
-
-        //public PokemonListItemBinding itemBinding;
         public PokemonListItemBinding itemBinding;
 
         public PokemonHolder(PokemonListItemBinding itemBinding) {

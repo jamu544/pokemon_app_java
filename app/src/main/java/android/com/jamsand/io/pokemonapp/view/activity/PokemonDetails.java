@@ -25,41 +25,28 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class PokemonDetails extends AppCompatActivity {
 
     private Context context;
-
-
-
-
-
-    private static String TAG = MainActivity.class.getSimpleName();
     private String pokemonName="";
-    private String pokemonID = "";
     private ActivityPokemonDetailsBinding binding;
-    PokemonViewModel pokemonViewModel;
     private ProgressDialog progressBar;
-    APIInterface apiInterface;
-
+    Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_pokemon_details);
-        context = this;
-        Intent intent = getIntent();
-        pokemonName = intent.getStringExtra(Utils.EXTRA_POKEMON_NAME);
+
         init();
         binding.pokemonDetailsName.setText(pokemonName);
         getPokemonDetailsFromAPIRequest(pokemonName);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
@@ -73,11 +60,13 @@ public class PokemonDetails extends AppCompatActivity {
     }
 
     private void init(){
-
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_pokemon_details);
+        context = this;
+        intent = getIntent();
+        pokemonName = intent.getStringExtra(Utils.EXTRA_POKEMON_NAME);
         progressBar = new ProgressDialog(context);
         progressBar.setMessage("Loading...");
         progressBar.show();
-        pokemonViewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
     }
 
     private void getPokemonDetailsFromAPIRequest(String pokemonName){
@@ -103,7 +92,7 @@ public class PokemonDetails extends AppCompatActivity {
                     stringBuilder.append(type.type.name+" ");
                 }
                 binding.typeTextView.setText("Type : "+stringBuilder);
-                Glide.with(context)
+                Picasso.with(context)
                         .load(response.body().sprites.other.home.front_default)
                         .into(binding.imageView);
                 progressBar.dismiss();

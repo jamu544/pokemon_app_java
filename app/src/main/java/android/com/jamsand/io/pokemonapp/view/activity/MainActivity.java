@@ -22,30 +22,26 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
-    private static String TAG = MainActivity.class.getSimpleName();
     private Context context;
     private RecyclerView recyclerView;
     private PokemonAdapter adapter;
     private ProgressDialog progressBar;
-
     private ArrayList<Pokemon.PokemonArray> pokemonArrayList = new ArrayList<>();
-    PokemonViewModel pokemonViewModel;
-
-
+    private PokemonViewModel pokemonViewModel;
     public ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        context = this;
+
 
         init();
         getPokemons();
     }
 
     private void init(){
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        context = this;
         progressBar = new ProgressDialog(context);
         progressBar.setMessage("Loading...");
         progressBar.show();
@@ -64,10 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 progressBar.dismiss();
                 List<Pokemon.PokemonArray> pokemonList = pokemon.results;
                 pokemonArrayList.addAll(pokemonList);
-
-                //    binding.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
             }
         });
     }
