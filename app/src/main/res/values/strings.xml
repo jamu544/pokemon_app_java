@@ -8,4 +8,6 @@
     <string name="name">Guess the pokemon</string>
     <string name="action_bar_title">Back</string>
     <string name="pokemon_font">pokemon_solid.ttf</string>
+    <string name="search">SEARCH</string>
+    <string name="loading">Loading...</string>
 </resources>

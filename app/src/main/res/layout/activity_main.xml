@@ -9,24 +9,26 @@
             name="adapter"
             type="android.com.jamsand.io.pokemonapp.adapter.PokemonAdapter" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
 
+        android:id="@+id/containerMainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        android:id="@+id/containerMainLayout"
         tools:context=".view.activity.MainActivity">
+
         <TextView
             android:id="@+id/pokemonTitleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pokemon_hollow"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/pokemon_hollow"
             android:text="@string/pokemons"
-            android:textColor="@color/yellow"
             android:textAlignment="center"
+            android:textColor="@color/yellow"
             android:textSize="50sp"
             app:layout_constraintBaseline_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,18 +37,24 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="356dp"
+            android:layout_height="474dp"
             android:layout_marginBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pokemonTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/search"
             tools:itemCount="5" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="327dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonTitleTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -15,6 +15,10 @@ import android.com.jamsand.io.pokemonapp.viewmodel.PokemonViewModel;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         context = this;
         progressBar = new ProgressDialog(context);
-        progressBar.setMessage("Loading...");
+        progressBar.setMessage(getString(R.string.loading));
         progressBar.show();
 
         adapter = new PokemonAdapter( pokemonArrayList,context);
@@ -74,4 +78,29 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         Toast.makeText(context, pokemonArrayList.get(pokemon.pokemonID).name,Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.search_option, menu);
+
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String searchQuery) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+               //adapter.
+                return false;
+            }
+        });
+
+
+        return true;
+    }
 }
