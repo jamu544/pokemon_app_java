@@ -15,7 +15,6 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.MainActivity"
-            android:theme="@style/Theme.PokemonApp.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

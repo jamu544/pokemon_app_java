@@ -9,6 +9,8 @@ import android.com.jamsand.io.pokemonapp.model.Pokemon;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -21,7 +23,7 @@ import androidx.databinding.DataBindingUtil;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> implements OnItemClickListener{
+public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonHolder> implements OnItemClickListener {
 
     public Context context;
     public List<Pokemon.PokemonArray> pokemonList;
@@ -63,6 +65,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonH
     @Override
     public void onClick(Pokemon.PokemonArray pokemon) {
         Toast.makeText(context, "Testing on cclick" + pokemon.name+" position", Toast.LENGTH_SHORT).show();
+    }
+
+    public void filterList(ArrayList<Pokemon.PokemonArray> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        pokemonList = filterlist;
+        notifyDataSetChanged();
+
     }
 
 

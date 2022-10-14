@@ -50,9 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         progressBar.setMessage(getString(R.string.loading));
         progressBar.show();
 
-        adapter = new PokemonAdapter( pokemonArrayList,context);
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setAdapter(adapter);
+
 
         pokemonViewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
 
@@ -64,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 progressBar.dismiss();
                 List<Pokemon.PokemonArray> pokemonList = pokemon.results;
                 pokemonArrayList.addAll(pokemonList);
+                adapter = new PokemonAdapter( pokemonArrayList,context);
+                recyclerView = findViewById(R.id.recyclerview);
+                recyclerView.setAdapter(adapter); //testing
             }
         });
     }
@@ -95,12 +96,26 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             @Override
             public boolean onQueryTextChange(String newText) {
 
-               //adapter.
+               filter(newText);
                 return false;
             }
         });
-
-
         return true;
+    }
+
+    private void filter(String newtext){
+        ArrayList<Pokemon.PokemonArray> filteredList = new ArrayList<Pokemon.PokemonArray>();
+        for (Pokemon.PokemonArray item: pokemonArrayList) {
+            if(item.name.toLowerCase().contains(newtext.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if(filteredList.isEmpty()){
+            Toast.makeText(context,"No Data Found..",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            adapter.filterList(filteredList);
+        }
+
     }
 }
